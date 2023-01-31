@@ -1,4 +1,4 @@
-import { baseUrl, repositoriesQuantity } from "/src/javascript/variables.js"; // Importando a variável para ser usada no ${} abaixo
+import { baseUrl, repositoriesQuantity } from "../variables.js"; // Importando a variável para ser usada no ${} abaixo
 
 async function getEvents(userName) {
   const response = await fetch(

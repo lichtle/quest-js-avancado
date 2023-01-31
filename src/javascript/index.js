@@ -1,13 +1,13 @@
 // Imports de fetch
 
-import { getUser } from "/src/javascript/services/get-user.js";
-import { getRepositories } from "/src/javascript/services/get-repositories.js";
-import { getEvents } from "/src/javascript/services/get-events.js";
+import { getUser } from "./services/get-user.js";
+import { getRepositories } from "./services/get-repositories.js";
+import { getEvents } from "./services/get-events.js";
 
 // Imports de objeto
 
-import { user } from "/src/javascript/objects/user.js";
-import { screen } from "/src/javascript/objects/screen.js";
+import { user } from "./objects/user.js";
+import { screen } from "./objects/screen.js";
 
 const button = document.getElementById("btn-search");
 const input = document.getElementById("input-search");
