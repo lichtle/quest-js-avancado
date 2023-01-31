@@ -17,7 +17,7 @@ const screen = {
   </div>
 </div>`;
 
-    let repositoriesItems = ""; // Variável a ser populada com repositórios
+    let repositoriesItems = []; // Array a ser populado com repositórios
 
     user.repositories.forEach(
       (repo) =>
@@ -29,6 +29,27 @@ const screen = {
       this.userProfile.innerHTML += ` <div class="repositories section">
                                         <h2>Repositórios</h2>
                                         <ul>${repositoriesItems}</ul>
+                                      </div>`;
+    }
+
+    let eventsItems = [];
+
+    let filteredEvents = user.events.filter((event) => {
+      // Filtrando o array user.events - array acima populado somente com os itens que nos interessam (filtrados)
+      return event.type === "CreateEvent" || event.type === "PushEvent"; // Itens de interesse (os que possuem type igual à CreateEvent ou igual à PushEvent)
+    });
+
+    filteredEvents.forEach((event) => {
+      eventsItems += `<li><p>${event.repo.name} &#x2022; ${
+        event.playload.commits[commits.length - 1].message
+      }</p></li>`;
+    });
+
+    if (user.events.length > 0) {
+      // Condição para verificar se o usuário possui eventos
+      this.userProfile.innerHTML += `<div class="events">
+                                        <h2>Eventos</h2>
+                                        <ul>${filteredEvents}</ul>
                                       </div>`;
     }
   },

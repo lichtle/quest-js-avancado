@@ -1,7 +1,8 @@
 // Imports de fetch
 
 import { getUser } from "/src/javascript/services/get-user.js";
-import { getRepositories } from "/src/javascript/services/repositories.js";
+import { getRepositories } from "/src/javascript/services/get-repositories.js";
+import { getEvents } from "/src/javascript/services/get-events.js";
 
 // Imports de objeto
 
@@ -44,7 +45,6 @@ function validateEmptyInput(userName) {
 async function getUserData(userName) {
   // Antigamente nomeada "getUserProfile", pois antes da refatoração era uma função para pegar os dados do usuário e outra função para pegar os repositórios (essas funções estão documentadas abaixo)
   const userResponse = await getUser(userName); // Ao invés de usar o then, na refatoração utilizamos o async e await e armazenamos a resposta em uma variável
-  console.log(userResponse);
 
   if (userResponse.message === "Not Found") {
     // Verifica se o usuário foi encontrado. Se não, a promise retornará um objeto com chave message e valor "Not Found" e irá disparar a função renderNotFound, criada no objeto screen do arquivo "objects/screen.js"
@@ -53,9 +53,12 @@ async function getUserData(userName) {
   }
 
   const repositoriesResponse = await getRepositories(userName);
+  const eventsResponse = await getEvents(userName);
 
   user.setInfo(userResponse); // Invocando a função criada dentro do objeto importado "user" e colocando as informações retornadas da promise acima dentro dela. Se dermos um console.log(user) veremos que agora temos o objeto user preenchido somente com as informações necessárias determinadas no arquivo "src/javascript/objects/user.js"
   user.setRepositories(repositoriesResponse); // O comentário acima vale para esta função, que retorna os repositórios do usuário
+  user.setEvents(eventsResponse);
+  console.log(repositoriesResponse);
   screen.renderUser(user); // Função para renderizar todas as infos dos usuários na tela
 }
 
