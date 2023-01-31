@@ -31,7 +31,7 @@ main {
 }
 
 .section {
-  padding: 70px 0;
+  padding: 70px 0 20px 0;
 }
 
 .container {
@@ -137,7 +137,7 @@ main {
 .container .profile-data .repositories ul li a {
   padding: 20px;
   border: 1px solid grey;
-  margin: 20px;
+  margin: 20px 35px;
   display: block;
   border-radius: 7px;
   transition: 0.3s ease-in-out;
@@ -150,6 +150,23 @@ main {
 
 .container .profile-data.hide {
   display: none;
+}
+
+.repo-info {
+  font-size: 14px;
+  background-color: hotpink;
+  color: white;
+  padding: 10px;
+  margin: 3px 3px 40px 3px;
+  border-radius: 7px;
+}
+
+.bold-event {
+  color: grey;
+}
+
+.event {
+  margin: 10px 0;
 }
 
 .follow {

@@ -21,7 +21,24 @@ const screen = {
 
     user.repositories.forEach(
       (repo) =>
-        (repositoriesItems += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`)
+        (repositoriesItems += `<li><a href="${repo.html_url}" target="_blank">${
+          repo.name
+        }</a>
+                                <ul>
+                                  <li class="repo-info">🍴 Forks: ${
+                                    repo.forks
+                                  }</li>
+                                  <li class="repo-info">⭐ Stars: ${
+                                    repo.stargazers_count
+                                  }</li>
+                                  <li class="repo-info">👀 Watchers: ${
+                                    repo.watchers
+                                  }</li>
+                                  <li class="repo-info">🖥️ Language: ${
+                                    repo.language ?? "não definida"
+                                  }</</li>
+                                </ul>
+                              </li>`)
     );
 
     if (user.repositories.length > 0) {
@@ -32,24 +49,26 @@ const screen = {
                                       </div>`;
     }
 
-    let eventsItems = [];
+    let eventsItems = ""; // Array a ser populado com eventos
 
     let filteredEvents = user.events.filter((event) => {
-      // Filtrando o array user.events - array acima populado somente com os itens que nos interessam (filtrados)
+      // filteredEvents será um array populado apenas com os itens que nos interessam, através do método filter no array user.events (que são todos os eventos)
       return event.type === "CreateEvent" || event.type === "PushEvent"; // Itens de interesse (os que possuem type igual à CreateEvent ou igual à PushEvent)
     });
 
     filteredEvents.forEach((event) => {
-      eventsItems += `<li><p>${event.repo.name} &#x2022; ${
-        event.playload.commits[commits.length - 1].message
-      }</p></li>`;
+      if (event.payload.commits) {
+        eventsItems += `<li class="event">${event.repo.name} <span class="bold-event">~${event.payload.commits[0].message}<span></li>`;
+        console.log(event);
+      }
     });
 
     if (user.events.length > 0) {
       // Condição para verificar se o usuário possui eventos
-      this.userProfile.innerHTML += `<div class="events">
+      this.userProfile.innerHTML += `<div>
                                         <h2>Eventos</h2>
-                                        <ul>${filteredEvents}</ul>
+                                        <br>
+                                        <ul>${eventsItems}</ul>
                                       </div>`;
     }
   },

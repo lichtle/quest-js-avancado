@@ -58,7 +58,6 @@ async function getUserData(userName) {
   user.setInfo(userResponse); // Invocando a função criada dentro do objeto importado "user" e colocando as informações retornadas da promise acima dentro dela. Se dermos um console.log(user) veremos que agora temos o objeto user preenchido somente com as informações necessárias determinadas no arquivo "src/javascript/objects/user.js"
   user.setRepositories(repositoriesResponse); // O comentário acima vale para esta função, que retorna os repositórios do usuário
   user.setEvents(eventsResponse);
-  console.log(repositoriesResponse);
   screen.renderUser(user); // Função para renderizar todas as infos dos usuários na tela
 }
 
